@@ -60,24 +60,30 @@
           <p>{{ msg.text }}</p>
         </div>
         <!-- <div id="like-div"> -->
+        {% if g.user.id != msg.user_id %}
+
         <form
           method="POST"
           action="/messages/{{ msg.id }}/like"
           id="messages-form {{msg.id}}"
-          class="{{msg.id}}"
+          class="{{msg.id}} like-button"
         >
           <button
             type="submit"
             class="
-                btn 
-                btn-sm 
-                like-button
-                {{'btn-primary' if msg.id in likes else 'btn-secondary'}} "
+                  btn 
+                  btn-sm 
+                  {{'btn-primary' if msg.id in likes else 'btn-secondary'}} "
           >
+            {% if msg in g.user.likes %}
             <i class="fa fa-thumbs-up" id="like {{msg.id}}"></i>
+            {%else%}
+            <i class="far fa-thumbs-up"></i>
+            {% endif %}
           </button>
         </form>
         <!-- </div> -->
+        {%endif%}
       </li>
       {% endfor %} {%else%}
       <p>Follow users to see content!</p>

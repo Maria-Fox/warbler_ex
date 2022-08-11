@@ -18,7 +18,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
@@ -331,10 +331,13 @@ def handle_likes(message_id):
         flash("Signed in users may only like warbles written by other users.",  "danger")
         return redirect("/")
     liked = Message.query.get_or_404(message_id)
-    if liked.messsage is g.user.id:
-        flash("You may only like tweets from other users", "danger")
-        return abort(403)
 
+    # if it's the current user, do not like their own messages
+    if liked.user.id is g.user.id:
+        flash("You may only like tweets from other users", "danger")
+        return redirect("/")
+
+    # use db relationship from User through likes to messages
     likes = g.user.likes
 
     if liked in likes:

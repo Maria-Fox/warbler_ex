@@ -545,3 +545,7 @@ p.card-bio {
 .like-button {
   z-index: 1;
 }
+
+#like {
+  size: 5rem;
+}
