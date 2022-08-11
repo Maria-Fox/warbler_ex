@@ -228,7 +228,7 @@ def profile():
             g.user.username = form.username.data
             g.user.email= form.email.data
             g.user.image_url = form.image_url.data or None
-            g.user.header_image_url = form.header_image.data or None
+            g.user.header_image_url = form.header_image_url.data or None
             g.user.bio = form.bio.data
 
             db.session.add(g.user)
