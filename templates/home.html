@@ -71,7 +71,8 @@
             class="
                 btn 
                 btn-sm 
-                {{'btn-primary' if msg.id in likes else 'btn-secondary'}}"
+                like-button
+                {{'btn-primary' if msg.id in likes else 'btn-secondary'}} "
           >
             <i class="fa fa-thumbs-up" id="like {{msg.id}}"></i>
           </button>
