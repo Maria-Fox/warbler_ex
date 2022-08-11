@@ -224,8 +224,7 @@ def profile():
     print(g.user)
 
     if form.validate_on_submit():
-
-        if User.authenticate(form.username.data, form.password.data):
+        if User.authenticate(user.username, form.password.data):
             g.user.username = form.username.data
             g.user.email= form.email.data
             g.user.image_url = form.image_url.data or None
@@ -240,7 +239,7 @@ def profile():
 
             return redirect("/")
     else:
-        return render_template ("/users/edit.html", form=form)
+        return render_template ("/users/edit.html", form=form, user_id= user.id)
 
 
 @app.route('/users/delete', methods=["POST"])
