@@ -1,5 +1,4 @@
 import os
-import pdb
 from flask import Flask, render_template, request, flash, redirect, session, g, abort
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
@@ -155,6 +154,9 @@ def users_show(user_id):
                 .all())
     
     return render_template('users/show.html', user=user, messages=messages)
+
+##############################################################################
+# Following/followers routes
 
 
 @app.route('/users/<int:user_id>/following')
