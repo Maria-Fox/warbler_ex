@@ -339,7 +339,7 @@ def handle_likes(message_id):
         flash("You may only like tweets from other users", "danger")
         return redirect("/")
     #     # They aborted - this is probably best to do
-    #     # return abort(403)- not really necessary since the form doesn't show for them, anyway- logic in HTML pg.
+    #     # return abort(403)- not really necessary since the form doesn't show for them, anyway- logic in HTML pg. added.
 
     # # use db relationship from User through likes to messages
     likes = g.user.likes

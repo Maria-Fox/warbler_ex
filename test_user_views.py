@@ -8,7 +8,7 @@
 import os
 from unittest import TestCase
 from models import db, connect_db, Message, User, Likes, Follows
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 os.environ['DATABASE_URL'] = "postgresql:///warbler_test"
 
@@ -78,7 +78,6 @@ class UserViewTestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
 
             self.assertIn("@test1", str(resp.data))
-            # soup = BeautifulSoup(str(resp.data), 'html.parser')
  
     def test_add_like(self):
         m = Message(id=4040, text="testing add like", user_id=self.user1.id)
