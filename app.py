@@ -338,12 +338,16 @@ def handle_likes(message_id):
     if liked.user.id is g.user.id:
         flash("You may only like tweets from other users", "danger")
         return redirect("/")
+    #     # They aborted - this is probably best to do
+    #     # return abort(403)- not really necessary since the form doesn't show for them, anyway- logic in HTML pg.
 
-    # use db relationship from User through likes to messages
+    # # use db relationship from User through likes to messages
     likes = g.user.likes
 
+    # This doubles as the toggle feature for liking message. If clicked message was previously inside the g.user.likes, then the click behaves as a pop and removes the liked message.id, creating new list w/ updated likes. (In other words, we're accepting the messages that were already in likes but NOT the new message_id being passed in thru "liked"). Otherwise, we're appending that message.id to our likes. 
+
     if liked in likes:
-        likes = [like for like in likes if like != liked]
+        g.user.likes = [like for like in likes if like != liked]
     else:
         g.user.likes.append(liked)
 
